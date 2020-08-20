@@ -13,23 +13,24 @@ refs.form.addEventListener(
 refs.btn.addEventListener('click', fetchRequest);
 
 function setInputValue(event) {
-  // event.preventDefault();
-  cleanContainerGallery();
   const queryInput = event.target.value.trim();
+  if (queryInput === '') {
+    return;
+  }
+  cleanContainerGallery();
   apiService.query = queryInput;
   apiService.resetPage();
   fetchRequest();
 }
-
 function cleanContainerGallery() {
   refs.gallery.innerHTML = '';
 }
 
 function fetchRequest() {
-  loadMoreBtn.disable();
+  loadMoreBtn.enable(true, 'Loading...');
   apiService.fetchGallery().then(hits => {
     loadMoreBtn.show();
-    loadMoreBtn.enable();
+    loadMoreBtn.enable(false, 'Load more');
     updateMarkup(hits);
     scrollWindow();
   });

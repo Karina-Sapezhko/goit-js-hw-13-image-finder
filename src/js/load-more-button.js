@@ -1,15 +1,10 @@
 import refs from './refs.js';
 
 export default {
-  enable() {
-    refs.btn.disabled = false;
-    refs.label.textContent = 'Load more';
-    refs.spinner.classList.add('is-hidden');
-  },
-  disable() {
-    refs.btn.disabled = true;
-    refs.label.textContent = 'Loading...';
-    refs.spinner.classList.remove('is-hidden');
+  enable(boole, str) {
+    refs.btn.disabled = boole;
+    refs.label.textContent = str;
+    refs.spinner.classList.toggle('is-hidden');
   },
   show() {
     refs.btn.classList.remove('is-hidden');
